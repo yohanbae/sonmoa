@@ -1,0 +1,14 @@
+<ion-button (click)="onClose()">Close</ion-button>
+<p>
+  seemember works!
+</p>
+<ul>
+  <li *ngFor="let item of filterGroupMember()">
+    {{ item.displayName}} | {{item.role}} | {{item.uid}}
+    <span *ngIf="item.uid==uid">ME</span>
+    <span *ngIf="item.uid!=uid && checkIfMyFriend(item.uid)=='friend'">Friend</span>
+    <span *ngIf="item.uid!=uid && checkIfMyFriend(item.uid)=='request'">Waiting</span>    
+    <span *ngIf="item.uid!=uid && checkIfMyFriend(item.uid)=='received'"><ion-button (click)="onAcceptFriend(item.uid, item.displayName, item.email)">친구수락</ion-button></span>    
+    <ion-button *ngIf="item.uid!=uid && checkIfMyFriend(item.uid)=='no'" (click)="onSendInvite(item.uid, item.displayName, item.email)">친구신청</ion-button>
+  </li>
+</ul>

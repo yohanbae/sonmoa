@@ -1,0 +1,12 @@
+<ion-button (click)="onClose()">Close</ion-button>
+
+<p>
+  Manage Admin
+</p>
+<ul>
+  <li *ngFor="let item of filterGroupMember()">
+    {{item.displayName}} | {{item.role}} | {{item.email}}
+    <ion-button *ngIf="item.role=='member'" (click)="onAssign(item.uid, item.displayName, item.email)">assign Admin</ion-button>
+    <ion-button *ngIf="item.role=='admin'" (click)="onDismiss(item.uid, item.displayName, item.email)">De-assign Admin</ion-button>
+  </li>
+</ul>

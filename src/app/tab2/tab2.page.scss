@@ -1,0 +1,174 @@
+.theheader{
+    background-size:cover;
+    background-position: center bottom;
+    padding:10px 0px 10px 0px;
+    position:relative;
+  
+    .thetop{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      padding:0 2%;
+      font-size:15px;
+      margin-bottom:20px;
+      ion-icon{color:white; font-size:25px;}
+      .thegoal-display{
+        font-size:12px;
+      }
+      .thetitle-display{font-size:20px; font-weight:bold;}
+      .thedate-display{font-size:12px;}      
+    }
+  
+    .find-wrap, .found-wrap{
+      padding:0 2%;
+      height:30px;
+      position:relative;
+      .findfriend{height:30px;
+        width:100%;
+        background: #ededed;
+        border-radius: 5px;
+        border:0;
+        padding-left:15px;
+        font-size:12px;
+        display:grid;
+        align-items:center;
+        //border-bottom:1px solid lightgray;
+      }
+        button{
+          height:30px;
+          margin:0; padding:0;
+          width:40px;
+          position: absolute;
+          right:2%;
+          top:0;
+          background:none;
+        }
+        ion-icon{font-size:16px;}
+    }
+    .found-wrap{
+        padding-left:50px;
+    }
+  } //theheader End
+  
+.friend-wrap{
+    font-size:12px;
+    h6{
+      font-size:12px;
+      font-weight:bold;
+      color:#21a343;
+    }
+    .list{
+        border-bottom: 1px solid lightgray;
+        padding:15px 0;
+    }
+    .list:last-child{border-bottom:0px;}
+
+    .found-wrap{
+      padding:20px 2% 0 2%;
+      position:relative;
+      .findfriend, .friend-requested{
+        width:100%;
+        font-size:12px;
+        display:grid;
+        grid-template-columns: 1fr 100px;
+        .thealign{
+          display:grid;
+          align-items: center;
+          height:auto;
+        }
+        .send-button{
+          margin:0; padding:0;
+          width:100px;
+          background:#21a343;
+          padding:7px 0;
+          color:white;
+          border-radius:10px;
+          float:right;
+          box-sizing: border-box;
+          font-weight: bold;
+        }        
+      }
+      .friend-requested{margin-bottom: 10px;}
+
+    }
+
+  }
+
+.display-wrap{
+  background:rgba(0,0,0,0.6);
+  position: absolute;
+  width:100%;
+  height:100%;
+  z-index:9999!important;
+  display:none;
+  opacity:0;
+  transition:500ms;
+  .display-prayers{
+    width:80%;
+    height:90%;
+    position: absolute;  
+  
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  
+    background:#f3ff94;
+    border-radius:10px;
+
+    -webkit-box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.75);
+    box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.75);  
+  
+    .thetop{position: absolute; top:0; left:0; width:100%;
+      height:50px;
+      background:#d0e33b;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      display:grid;
+      align-items: center;
+      justify-content: center;
+      color:white;      
+      font-weight: bold;
+    }
+    .thebottom{position: absolute; bottom:0; left:0; width:100%;
+      height:50px;
+      background:#d0e33b;      
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      display:grid;
+      align-items: center;
+      justify-content: center;
+      color:white;
+      font-weight: bold;
+      cursor:pointer;
+    }
+    .themiddle{
+      height:calc(100% - 140px);
+      margin-top:70px;
+      padding:0 20px;
+      overflow-y:scroll;
+      .thelist{
+        margin-bottom:20px;
+        font-size:14px;
+        h6{margin:0; padding:0; font-size:14px; color: #3632b8; margin-bottom:10px;}
+      }
+    }
+
+    .themen{
+      border-bottom:1px solid lightgray;
+      height:90px;
+      display:grid;
+      align-items:center;
+      padding:0 0;
+      font-size:16px;
+      grid-template-columns: 1fr 3fr;
+      ion-icon{
+        margin-top:10px;
+        display:inline-block; font-size:20px; margin-right:10px;}
+      padding-left:20px;
+      span{padding-top:10px;}
+    }
+  }
+}
+.display-wrap-on{
+  opacity:1;
+}

@@ -1,0 +1,24 @@
+<ion-button (click)="onClose()">Close</ion-button>
+<p>
+  Create Group
+  <!-- {{lists}} -->
+</p>
+<input type="text" placeholder="Enter Group ID" [(ngModel)]="groupId" />
+<h6>{{ idCorrect }}</h6>
+<input type="text" placeholder="Enter Group Name" [(ngModel)]="groupName" />
+<h6>{{nameMsg}}</h6>
+<input type="text" placeholder="Enter description" [(ngModel)]="groupDesc" />
+<h6>{{descMsg}}</h6>
+
+<span>Private Mode ?<ion-checkbox [(ngModel)]="thePrivate"></ion-checkbox></span>
+
+<p>Invite Friend</p>
+<ul>
+  <li *ngFor="let item of lists">
+    {{item.displayName}} | {{ item.email}}
+    <ion-checkbox (click)="onInvite(item.displayName, item.uid, item.email)"></ion-checkbox>
+  </li>
+</ul>
+
+
+<ion-button (click)="onEnter()">Enter</ion-button>

@@ -1,0 +1,418 @@
+.welcome-card img {
+  max-height: 35vh;
+  overflow: hidden;
+}
+
+.theheader{
+  background-size:cover;
+  background-position: center bottom;
+  padding:10px 0px 0px 0px;
+  position:relative;
+
+  .thetop{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    padding:0 2%;
+    font-size:15px;
+    margin-bottom:20px;
+    ion-icon{color:white; font-size:25px;}
+    .thegoal-display{
+      font-size:12px;
+    }
+    .thetitle-display{font-size:20px; font-weight:bold;}
+    .thedate-display{font-size:12px;}
+  }
+  .percent-wrap{
+    width:96%; margin-left:2%;
+    border-radius:5px;
+    padding:0 10px;
+    margin-top:35px;
+    position:relative;
+    padding-bottom:30px;
+    .theone{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      font-size:12px;
+      .thegoal{
+        font-size:24px;
+        color:#60d128;
+        margin-right:20px;
+      }
+      .thepercent{
+        font-size:24px;
+      }
+    }
+    .thethetimer{
+      text-align: right;
+      width:100%; font-size:12px;
+      margin-top:5px;
+    }
+    .thebar{
+      height:5px;
+      background:#e3e3e3;
+      position:relative;
+      .percent-bar{
+        position: absolute;
+        top:0; left:0;
+        width:60%;
+        background:#1f211e;
+        height:5px;
+      }
+    }
+
+  }//percent-wrap end
+
+  
+  .thetabs{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding:0 15px;
+    .each-kan{
+      background:rgba(255,255,255,0.0);
+      text-align:center;
+      font-size:12px;
+      font-weight: bold;
+      padding:10px 0 10px 0;
+      // &:first-child{
+      //   text-align:left;
+      // }
+      // &:last-child{
+      //   text-align:right;
+      // }
+    }
+    .theone{
+      position: relative;
+      &:before{
+        content:'';
+        position: absolute;
+        border-bottom:2px solid black;
+        width:10px;
+        left:50%;
+        height:2px;
+        bottom:0;
+      }
+      &:after{
+        content:'';
+        position: absolute;
+        border-bottom:2px solid black;
+        width:10px;
+        right:50%;
+        height:2px;
+        bottom:0;
+      }          
+    }
+
+  }
+
+} //theheader End
+
+
+.chapter-box{
+  display:grid;
+  grid-template-columns:repeat(7, 1fr);
+  grid-gap:4px;
+  
+  .chapter{
+//        border:1px solid gray;
+      background:rgba(255,255,255,0.3);
+      color:rgba(0,0,0,0.8);
+      text-align: center;
+      padding:15px 0px;
+      cursor:pointer;
+  }
+  .check{
+      background:rgba(255,255,255,0.6);
+      
+  }
+}
+
+.item{
+  cursor:pointer;
+}
+
+
+html,body{
+
+  background: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%); 
+}
+
+.header{
+  --background: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%); 
+  color:white;
+  height:70px;
+  --padding-bottom:5px;
+  display:grid; align-items:center;
+  .header-title{
+      font-size:14px;
+  }
+  .button-circle{
+      background:none;
+      color:white;
+      font-size:35px;
+      margin-top:5px;
+  }
+}
+
+.prayer-list{
+  --padding:0px;
+  --height:30px;
+  color:black;
+
+}
+.add-button{
+  --border-radius: 50%;
+  --background:red;
+  width:50px; 
+  height:50px;
+}
+
+.content-wrap{
+  z-index:99;
+  .icon-wrap{
+      --background:none;
+      .icon-trash{ color:black; background:none; font-size:20px;}
+      .icon-update{ color:black; background:none; font-size:20px;}
+  }
+  .list-wrap{
+    background:none;
+    padding-bottom:30px;
+    h5{margin:0; padding:0;}
+    .subtitle{
+      font-weight: bold;
+      font-size:12px;
+      padding-left:10px;
+    //  margin-top:20px;
+    }
+  }
+  .add-border{
+      background:none;
+      margin-bottom:10px;
+      &:first-child{
+        .right-button{background:lightblue;}
+      }
+      &:nth-child(2n){
+        .right-button{
+          background:orange;
+        }
+      }
+      &:nth-child(3n){
+        .right-button{background:red;}
+      }
+      &:nth-child(4n){
+        .right-button{
+          background:pink;
+        }
+      }
+      &:nth-child(5n){
+        .right-button{
+          background:blue;
+        }
+      }          
+  }
+  
+  .add-border2{
+      &:nth-child(1){border-bottom:none;}
+  }   
+  .remove-border{border-bottom:0px solid black;}
+  .prayer-date{font-size:10px; color:#271adb;}
+  .item-pad{padding:5px 0;
+      --background:none;
+      ion-icon{font-size:30px; margin-left:10px;}
+      .empty-icon{width:40px;}
+      h5{padding-right:10px;}
+      .right-button{
+        background:#38a2c2;
+        width:35px; height:100%;
+        // border-top-right-radius: 10px;
+        // border-bottom-right-radius: 10px;
+           
+        border-radius:10px;
+        display:grid;
+        justify-content: center;
+        align-items: center;
+        opacity:0.7;
+     
+        .thecircle{width:7px; height:7px; border-radius: 50%; background:white;}     
+      }
+
+  }
+
+  
+}
+.content-wrap2{--background:none;}
+
+
+
+.thecenter{
+  display:grid;
+  justify-content: center;
+  align-items: center;
+  width:100%;
+  position: absolute;
+  bottom:0;
+  height:160px;
+}
+
+//.circle-theme{}
+.thetime{
+  width:100%;
+  text-align: center;
+  position: absolute;
+  bottom:-5px;
+  left:0;
+  font-size:13px;
+  opacity:0.7;
+  letter-spacing:2px;
+}
+
+.hoho{
+  position:absolute;
+  bottom:0px; 
+  left:0;
+  width:100%; 
+  height:100%;
+  display:grid;
+  justify-content:center;
+  align-items:center;
+  text-align: center;
+  .thebutton{
+      border:1px solid black;
+  }
+}
+
+.close-btn, .play-btn, .create-prayer-btn{
+  z-index: 9999;
+  bottom:30px;
+  position: fixed;
+  right:23px;
+  opacity:1;
+  transition:500ms;
+  width:50px; height:50px;
+  background:#6392ff;
+  color:white;
+  font-size:25px;
+  border-radius: 50%; border:none;
+}
+.close-btn{z-index:10000;}
+.create-prayer-btn{ opacity:0;
+  &:before{
+    content:'Add Prayer';
+    position: absolute;
+    bottom:-20px;
+    left:-17px;
+    font-size:12px;
+    width:80px;
+    color:black;
+    font-weight:bold;
+  }
+}
+.play-btn{ opacity:0;
+  &:before{
+    content:'Start Prayer';
+    position: absolute;
+    bottom:-20px;
+    left:-17px;
+    font-size:12px;
+    width:80px;
+    color:black;
+    font-weight:bold;
+  }
+}
+.close-on{transform: rotate(45deg);}
+.create-on{ bottom:130px; opacity:1;}
+.play-on{right:123px; opacity:1;}
+
+.thebackdark{
+  position: fixed;
+  bottom:-130px;
+  right:-130px;
+  width:70px;
+  height:70px;
+  background:rgba(96, 209, 40, 0.5);
+  border-radius:50%;
+  border:13px solid rgba(96, 209, 40,0.3);
+  transition:500ms;
+  opacity:0;
+}
+.theon{width:340px !important; height:340px !important; opacity:1;}
+
+
+#canvas-chart{
+  padding:15% 5% 5% 5%;
+}
+
+.thefooter{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  .thecol-1,.thecol-2,.thecol-3{
+      display:grid;
+      justify-content:center;
+      align-items:center;
+      padding:5%;
+      font-size:14px;
+      text-align: center;
+  }
+  .thecol-1{background:rgba(255, 247, 0, 0.3);}
+  .thecol-2{background:rgba(242, 242, 242, 0.3);}
+  .thecol-3{background:rgba(242, 49, 31,0.3);}    
+}
+
+
+
+///////////////////
+
+.prayer-submenu{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap:20px;
+  background:lightblue;
+  padding:20px;
+
+
+}
+
+.setup-wrap{
+  width:100%;
+  height:100%;
+  position: absolute;
+  background:rgba(0,0,0, 0.6);
+  display:none;
+  opacity:0;
+  z-index:9999!important;  
+  transition:500ms;
+  .thesetup{
+    width:70%;
+    height:270px;
+    position: absolute;  
+
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    background:white;
+    border-radius:10px;
+    
+
+    -webkit-box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.75);
+    box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.75);  
+
+    .themen{
+      border-bottom:1px solid lightgray;
+      height:90px;
+      display:grid;
+      align-items:center;
+      padding:0 0;
+      font-size:16px;
+      grid-template-columns: 1fr 3fr;
+      ion-icon{
+        margin-top:10px;
+        display:inline-block; font-size:20px; margin-right:10px;}
+      padding-left:20px;
+      span{padding-top:10px;}
+    }
+  }
+}
+.setup-wrap-on{
+  opacity:1;
+}

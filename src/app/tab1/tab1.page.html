@@ -1,0 +1,207 @@
+<div class="setup-wrap" (click)="closeSetup()">
+  <div class="thesetup" tabindex="0">
+    <div class="themen" (click)="updateModal()">
+      <ion-icon name="build"></ion-icon>
+      <span>UPDATE</span>
+    </div>
+    <div *ngIf="afAuth.auth.currentUser">
+      <div class="themen" *ngIf="!objshared" (click)="shareModal()">
+        <ion-icon name="paper-plane"></ion-icon>
+        <span>Share</span>
+      </div>
+      <div class="themen" *ngIf="objshared" (click)="onStopShare()">
+        <ion-icon name="undo"></ion-icon>
+        <span>Unshare</span>
+      </div>
+    </div>
+    <div class="themen" (click)="onDel()">
+      <ion-icon name="close-circle"></ion-icon>
+      <span>DELETE</span>
+    </div>
+  </div>
+</div>
+
+<ion-header class="theheader" no-border>
+  <div class="thetop">
+    <span class="thetitle-display">Start Meditation</span>
+    <span class="thedate-display" style="text-align: right; float:right">
+      AUG 24, 2019
+    </span>
+  </div>
+  <div class="thetabs">
+    <span class="each-kan" [ngClass]="tabSelect==1?'theone':''" (click)="onTab(1)">See all</span>
+    <span class="each-kan" [ngClass]="tabSelect==2?'theone':''" (click)="onTab(2)">Personal</span>
+    <span class="each-kan" [ngClass]="tabSelect==3?'theone':''" (click)="onTab(3)">Friends</span>
+    <span class="each-kan" [ngClass]="tabSelect==4?'theone':''" (click)="onTab(4)">Group</span>
+  </div>  
+  <div class="percent-wrap" (click)="startTime()">
+    <div class="theone">
+      <span><span class="thegoal">Goal</span> 1hr 30min</span>
+      <span style="text-align:right;">
+        <span class="thepercent">{{percent}}%</span>
+      </span>
+    </div>
+    <div class="thebar"><div class="percent-bar"></div></div>
+    <div class="thethetimer">
+      {{elapsed.h}}:{{ elapsed.m }}:{{ elapsed.s }}
+    </div>
+  </div>
+
+</ion-header>
+
+<ion-content class="content-wrap">
+  
+    <ion-list *ngIf="tabSelect==1" class="list-wrap">
+        <h5 class="subtitle">Personal</h5>
+        <!-- Multi-line sliding item with icon options on both sides -->
+        <ion-item-sliding class="add-border" *ngFor="let obj of filterPersonalPrayerList()" lines="none">
+          <ion-item class="item-pad" lines="none" (click)="showSetup(obj.uid, obj.status=='shared')">
+            <ion-label text-wrap>
+              <h6 class="prayer-date">{{ obj.date }}</h6>
+              <h5>{{ obj.prayer }}</h5>
+              <h5 *ngIf="obj.status=='shared'">This thought is shared</h5>
+            </ion-label>
+            <!-- <div *ngIf="afAuth.auth.currentUser && obj.status!='shared'" (click)="showSetup(obj.uid, false)" class="right-button"><div class="thecircle"></div></div>
+            <div *ngIf="afAuth.auth.currentUser && obj.status=='shared'" (click)="showSetup(obj.uid, true)" class="right-button"><div class="thecircle"></div></div> -->
+          </ion-item>
+        </ion-item-sliding>     
+      </ion-list>
+
+      <ion-list *ngIf="tabSelect==1" class="list-wrap">
+        <h5 class="subtitle">Friends Meditation</h5>
+        <ion-item-sliding class="add-border" *ngFor="let obj of filterFriend()" lines="none">
+          <ion-item class="item-pad" lines="none">
+            <ion-label text-wrap>
+              <h6 class="prayer-date">{{ obj.date }}</h6>
+              <h5>{{ obj.prayer }}</h5>
+              <h5 *ngIf="obj.status">From {{ obj.displayName }}</h5>
+            </ion-label>
+            <div *ngIf="afAuth.auth.currentUser && !obj.status" class="right-button"><div class="thecircle"></div></div>
+          </ion-item>
+
+        </ion-item-sliding>     
+      </ion-list>
+
+      <ion-list *ngIf="tabSelect==1" class="list-wrap">
+        <h5 class="subtitle">Group Meditation</h5>
+        <ion-item-sliding class="add-border" *ngFor="let obj of filterGetGroupPrayer()" lines="none">
+          <ion-item class="item-pad" lines="none">
+            <ion-label text-wrap>
+              <h6 class="prayer-date">{{ obj.date }}</h6>
+              <h5>{{ obj.prayer }}</h5>
+              <h5>From {{ obj.groupName }}</h5>
+            </ion-label>
+            <!-- <div *ngIf="afAuth.auth.currentUser && !obj.status" class="right-button"><div class="thecircle"></div></div> -->
+          </ion-item>
+        </ion-item-sliding>     
+      </ion-list>
+
+
+      <ion-list *ngIf="tabSelect==2" class="list-wrap">
+        <!-- Multi-line sliding item with icon options on both sides -->
+        <ion-item-sliding class="add-border" *ngFor="let obj of filterPersonalPrayerList()" lines="none">
+          <ion-item class="item-pad" lines="none" (click)="showSetup(obj.uid, obj.status=='shared')">
+            <ion-label text-wrap>
+              <h6 class="prayer-date">{{ obj.date }}</h6>
+              <h5>{{ obj.prayer }}</h5>
+              <h5 *ngIf="obj.status=='shared'">This thought is shared</h5>
+            </ion-label>
+            <!-- <div *ngIf="afAuth.auth.currentUser && obj.status!='shared'" (click)="showSetup(obj.uid, false)" class="right-button"><div class="thecircle"></div></div>
+            <div *ngIf="afAuth.auth.currentUser && obj.status=='shared'" (click)="showSetup(obj.uid, true)" class="right-button"><div class="thecircle"></div></div> -->
+          </ion-item>
+        </ion-item-sliding>
+      
+      </ion-list>
+
+      <ion-list *ngIf="tabSelect==3" class="list-wrap">
+        <!-- Multi-line sliding item with icon options on both sides -->
+        <div *ngIf="afAuth.auth.currentUser; else goLogin">
+          <ion-item-sliding class="add-border" *ngFor="let obj of filterFriend()" lines="none">
+            <ion-item class="item-pad" lines="none">
+              <ion-label text-wrap>
+                <h6 class="prayer-date">{{ obj.date }}</h6>
+                <h5>{{ obj.prayer }}</h5> 
+              </ion-label>
+              <!-- <div *ngIf="afAuth.auth.currentUser && !obj.status" (click)="showSetup(obj.uid, false)" class="right-button"><div class="thecircle"></div></div>
+              <div *ngIf="afAuth.auth.currentUser && obj.status" (click)="showSetup(obj.uid, true)" class="right-button"><div class="thecircle"></div></div>             -->
+            </ion-item>
+          </ion-item-sliding>
+        </div>
+        <ng-template #goLogin>
+          <div>
+            <span (click)="onMoveLogin()">You need to Login</span>
+          </div>    
+        </ng-template>        
+      </ion-list>
+
+      <ion-list *ngIf="tabSelect==4" class="list-wrap">
+          <!-- Multi-line sliding item with icon options on both sides -->
+          <div *ngIf="afAuth.auth.currentUser; else goLogin">
+            <ion-item-sliding class="add-border" *ngFor="let obj of filterGetGroupPrayer()" lines="none">
+              <ion-item class="item-pad" lines="none">
+                <ion-label text-wrap>
+                  <h6 class="prayer-date">{{ obj.date }}</h6>
+                  <h5>{{ obj.prayer }}</h5> 
+                  <h5>From {{ obj.groupName }}</h5>
+                </ion-label>
+                <!-- <div *ngIf="afAuth.auth.currentUser && !obj.status" (click)="showSetup(obj.uid, false)" class="right-button"><div class="thecircle"></div></div>
+                <div *ngIf="afAuth.auth.currentUser && obj.status" (click)="showSetup(obj.uid, true)" class="right-button"><div class="thecircle"></div></div>             -->
+              </ion-item>
+            </ion-item-sliding>
+          </div>
+          <ng-template #goLogin>
+            <div>
+              <span (click)="onMoveLogin()">You need to Login</span>
+            </div>    
+          </ng-template>        
+        </ion-list>
+
+    <div class="thebackdark"></div>
+      <div>
+        <button class="play-btn" (click)="startTime()">
+          <ion-icon *ngIf="!timer" name="play"></ion-icon>
+          <ion-icon *ngIf="timer" name="pause"></ion-icon>
+        </button>
+      </div>
+
+      <button class="close-btn" (click)="showSubNav()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+
+      <!-- <ion-fab-button class="create-prayer-btn" (click)="showModal()"> -->
+      <button class="create-prayer-btn" (click)="showModal()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+  </ion-content>
+  
+<!--   
+  <div class="thecenter" padding>
+    {{percent}}
+  </div>
+   -->
+  <!-- <div class="thecenter" padding>
+        <ion-fab class="hoho">
+            <ng-container class="thebutton" *ngIf="today_prayer_success==true; else running">
+              <ion-fab-button>
+                <ion-icon name="happy"></ion-icon>
+              </ion-fab-button>
+            </ng-container>
+        
+          <ng-template #running>
+            <ng-container class="thebutton" *ngIf="timer==false; else stopping">
+              <ion-fab-button (click)="startTime()">
+                <ion-icon name="play"></ion-icon>
+              </ion-fab-button>
+            </ng-container>
+          </ng-template>
+  
+          <ng-template #stopping>
+              <ion-fab-button (click)="stopTime()">
+                  <ion-icon name="square"></ion-icon>
+                </ion-fab-button>
+            </ng-template>        
+  
+        </ion-fab>
+  </div> -->
+    <!-- <p class="thetime">{{elapsed.h}}:{{ elapsed.m }}:{{ elapsed.s }}</p> -->
+  

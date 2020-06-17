@@ -1,0 +1,23 @@
+<div class="post-box">
+  <textarea id="prayer" class="prayer-post" wrap="hard" placeholder="Enter group prayer request"></textarea>
+  <ion-button (click)="onPostSubmit()">Post Group Prayer</ion-button>
+  <ion-button (click)="onPostClose()">Close</ion-button>
+</div>
+
+<div class="update-box">
+
+</div>
+
+
+<ion-button (click)="onClose()">Close</ion-button>
+<p>
+  postgroupprayer works!
+</p>
+<ul>
+  <li *ngFor="let item of filterGetGroupPrayer(myGroupList)">
+  {{item.prayer}}
+  <ion-button (click)="onUpdate(item.id, item.prayer)">Update</ion-button>
+  <ion-button (click)="onDelete(item.id)">Delete</ion-button>
+  </li>
+</ul>
+<ion-button (click)="onPost()">Post Group Prayer</ion-button>

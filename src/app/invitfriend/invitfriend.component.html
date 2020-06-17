@@ -1,0 +1,34 @@
+<ion-button (click)="onClose()">Close</ion-button>
+<div class="thetab">
+  <div>
+    <h6>멤버 관리 창</h6>
+    <ul>
+      <li *ngFor="let item of filterGroupMember()">
+
+        {{item.displayName }} | 
+          <span *ngIf="item.role=='owner'">창시자</span>        
+          <span *ngIf="item.role=='admin'">관리자</span>
+          <span *ngIf="item.role=='invited'">수락 기다리는 중</span>
+          <span *ngIf="item.role=='member'">구독자</span>
+          <span *ngIf="myRole == 'owner' || myRole=='admin'">
+            <ion-button *ngIf="item.role=='member'" (click)="onOut(item.uid, item.displayName, item.email)">강퇴</ion-button>
+            <ion-button *ngIf="item.role=='invited'" (click)="onOut(item.uid, item.displayName, item.email)">초대취소</ion-button>
+          </span>
+        </li>
+    </ul>
+  </div>
+
+  <div *ngIf="!groupPrivate">
+    <h6>친구 추가 창</h6>
+    <ul>
+      <span *ngFor="let item of filterMyFriendResult">
+        <li *ngIf="item.status!='received' && item.status!='request' && item.uid!=uid">
+          {{item.displayName }} | {{ item.uid}}
+          <ion-button (click)="onSendInvite(item.uid, item.displayName, item.email)">
+            Invite
+          </ion-button>
+        </li>
+      </span>
+    </ul>
+  </div>
+</div>

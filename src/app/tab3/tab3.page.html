@@ -1,0 +1,93 @@
+<div class="thebox-wrap" (click)="closeBox()">
+  <div class="thebox">
+    <h6>Show Box</h6>
+    <ion-button (click)="closeBox()">Close</ion-button>  
+    <div *ngFor="let item of filterGetGroupPrayer()">
+      <span>{{item.prayer}}</span>
+    </div>
+      <!-- <ion-button (click)="onSeeMember()">참여자보기</ion-button>    -->
+      <ion-button (click)="onInviteFriend()">Manage Members</ion-button> 
+      <ion-button *ngIf="areyouPrivate" (click)="onOut()">Unscribe</ion-button> 
+      <div *ngIf="areyouAdmin || areyouOwner">    
+      <ion-button (click)="onAddPrayer()">Manage Meditation</ion-button>
+      <ion-button *ngIf="areyouOwner" (click)="onAssignAdmin()">Manage Admin</ion-button>
+    </div>
+  </div>
+</div>
+<!-- <ion-header></ion-header> -->
+<ion-header class="theheader" no-border>
+  <div class="thetop">
+    <span class="thetitle-display">Group Manage</span>
+    <span class="thedate-display" style="text-align: right; float:right">
+      AUG 24, 2019
+    </span>
+  </div>
+  <div class="find-wrap" *ngIf="afAuth.auth.currentUser">
+    <input type="text" class="findgroup" placeholder="Search by Group name or ID" />
+    <button (click)="onFindGroup()"><ion-icon name="search"></ion-icon></button>
+  </div>  
+</ion-header>
+
+<ion-content *ngIf="afAuth.auth.currentUser; else goLogin">
+<div class="found-wrap" *ngIf="findGroupData">
+    <h6>Search :  {{findGroupData.length}} Found</h6>
+    <div class="findgroup" *ngFor="let item of findGroupData">
+      <div class="thealign"><span>{{item.groupName}}</span></div>
+      <!-- <button *ngIf="checkAlreadyMember(item.groupUid)" class="send-button">구독중</button> -->
+      <button *ngIf="!checkAlreadyMember(item.groupUid)" class="send-button" (click)="onSubscribe(item.groupUid, item.groupName)">구독하기</button>      
+    </div>
+  </div>    
+  <div class="friendfound"></div>
+
+  <div class="friend-wrap" *ngIf="getMyFriendList()">
+    <div class="found-wrap">
+      <h6>My Group</h6>
+      <div class="friend-requested" *ngFor="let item of filterMyOwnGroup()">
+        <div class="thealign">
+          <span (click)="onGroupClick(item.groupUid, item.groupName, item.role, item.private)">
+            <b>{{item.groupName}}</b><br>{{item.role}}
+          </span>
+        </div>        
+        <button class="send-button">{{item.role}}</button>
+      </div>      
+    </div>  
+
+    <div class="found-wrap">
+      <h6 *ngIf="getInvitedGroupNumber() > 0">{{getInvitedGroupNumber()}} Invited</h6>
+      <div class="friend-requested" *ngFor="let item of filterMyInvitedGroup()">
+        <div class="thealign">
+          <span>
+            <b>{{item.groupName}}</b><br>{{item.groupUid}} | {{item.private}}
+          </span>
+        </div>
+        <button class="send-button" (click)="onAcceptInvitation(item.groupName, item.groupUid, item.private)">초대수락</button>
+        <button class="send-button" (click)="onDenyInvitation(item.groupName, item.groupUid, item.private)">거절하기</button>
+      </div>
+    </div>
+
+    <div class="found-wrap">
+      <h6>Subscribed Group</h6>
+      <div class="friend-requested" *ngFor="let item of filterMyGroup()">
+        <div class="list" (click)="onGroupClick(item.groupUid, item.groupName, item.role, item.private)">  
+          <b>{{item.groupName}}</b><br>{{item.groupUid}}
+        </div>
+        <!-- <ion-button>Block</ion-button> -->
+      </div>
+    </div>
+
+  </div>
+
+
+  <ion-fab class="create-prayer-btn">
+      <ion-fab-button class="create-prayer-btn" (click)="showModal()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab> 
+
+</ion-content>
+
+<ng-template #goLogin>
+  <ion-content>
+    <span (click)="onMoveLogin()">You need to Login</span>
+  </ion-content>    
+</ng-template>

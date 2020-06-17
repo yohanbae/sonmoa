@@ -1,0 +1,21 @@
+export interface Group{
+    groupName:string;
+    groupUid:string;
+    groupDesc:string; 
+    groupMembers:[
+        {
+        displayName:string;
+        uid:string;
+        role:string;
+        }
+    ];
+    prayer:[
+        {
+            id:number;
+            prayer:string;
+            date:string;
+        }
+    ]
+    private:boolean,
+    groupId:string
+}

@@ -1,0 +1,18 @@
+<ion-header>
+    <ion-toolbar class="header">
+    <ion-title>
+      <h4 float-left class="header-title">SHARE PRAYER</h4>
+      <!-- <button class="button-circle" float-right (click)="close()"><ion-icon name="close-circle"></ion-icon></button> -->
+      <ion-fab class="create-prayer-btn">
+        <ion-fab-button class="create-prayer-btn" (click)="close()">
+          <ion-icon name="close"></ion-icon>
+        </ion-fab-button>
+       </ion-fab>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-textarea [(ngModel)]="prayer"></ion-textarea>
+<ion-button (click)="onShare()">Share</ion-button>
+
+<ion-content></ion-content>

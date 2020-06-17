@@ -1,0 +1,32 @@
+
+.header{
+    --background:#fcba03;
+    padding:0; margin:0;
+    h4{
+        width:100%;
+        text-align: center;
+        color:white;
+        font-size:14px;
+        font-weight:bold;
+
+    }
+}
+ion-content{height:100%;}
+.prayer-post{
+    width:100%;
+    height:100%;
+    padding:20px;
+}
+
+.thefooter{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    button{
+        width:100%;
+        padding:10px;
+        background:#fcba03;
+        font-size:14px;
+        font-weight:bold;
+        color:white;
+    }
+}

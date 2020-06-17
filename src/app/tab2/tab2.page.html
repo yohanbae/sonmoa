@@ -1,0 +1,77 @@
+<div class="display-wrap" (blur)="closeDisplay()">
+  <div class="display-prayers" tabindex="0">
+    <div class="thetop">{{ name }}</div>
+    <div class="themiddle">
+      <div class="thelist" *ngFor="let item of myFriendPrayer">
+        <h6 class="">{{ item.date }}</h6>
+        {{ item.prayer }}
+      </div>
+    </div>  
+    <div class="thebottom" (click)="closeDisplay()">CLOSE</div>
+  </div>
+</div>
+<!-- <ion-header></ion-header> -->
+<ion-header class="theheader" no-border>
+  <div class="thetop">
+    <span class="thetitle-display">Manage Friend</span>
+    <span class="thedate-display" style="text-align: right; float:right">
+      AUG 24, 2019
+    </span>
+  </div>
+
+  <div class="find-wrap" *ngIf="afAuth.auth.currentUser">
+    <input type="text" class="findfriend" placeholder="Search by Email" />
+    <button (click)="onFindFriend()"><ion-icon name="search"></ion-icon></button>
+  </div>
+</ion-header>
+
+<!-- <firebase-ui (signInSuccessWithAuthResult)="successCallback($event)"></firebase-ui> -->
+
+<ion-content *ngIf="afAuth.auth.currentUser; else goLogin">
+  <div class="friend-wrap">
+    <div class="found-wrap" *ngIf="findFriendData">
+      <h6>User Found</h6>
+      <div class="findfriend">
+        <div class="thealign"><span>{{findFriendData.displayName}} {{findFriendData.email}}</span></div>
+        <button class="send-button" (click)="onSendFriendRequest(findFriendData.uid, findFriendData.displayName, findFriendData.email)">Send Request</button>      
+      </div>
+    </div>    
+    <div class="friendfound"></div>    
+
+    <div class="found-wrap">
+      <h6 *ngIf="getFriendWaitingNumber() > 0">{{getFriendWaitingNumber()}} requested</h6>
+      <div class="friend-requested" *ngFor="let student of filterReceived()">
+        <div class="thealign">
+          <span>
+            <b>{{student.displayName}}</b><br>{{student.email}}
+          </span>
+        </div>
+        <ion-button class="send-button" (click)="onAcceptFriend(student.uid, student.displayName, student.email)">Accept</ion-button>
+        <ion-button class="send-button" (click)="onDenyFriend(student.uid, student.displayName, student.email)">Deny</ion-button>
+      </div>
+    </div>
+
+    <div class="found-wrap">
+      <h6>My Friend List</h6>
+      <div class="friend-requested" *ngFor="let student of filterFriend()">
+        <div class="list" (click)="onView(student.uid, student.displayName)">  
+          <b>{{student.displayName}}</b><br>{{student.email}}
+        </div>
+      </div>
+    </div>
+
+    <!-- <div>
+      <h6>Pending: to be accepted</h6>
+      <div *ngFor="let student of filterRequest(myFriendList)">
+        {{student.displayName}} | {{student.status}}
+      </div>
+    </div> -->
+
+  </div>
+</ion-content>
+
+<ng-template #goLogin>
+  <ion-content>
+    <span (click)="onMoveLogin()">You need to Login</span>
+  </ion-content>    
+</ng-template>

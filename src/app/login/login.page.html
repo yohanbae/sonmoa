@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+
+  <hr>
+  <!-- <ion-button (click)="onSaveStorage()">SAVE Yohani</ion-button>
+  <ion-button (click)="onLoadStorage()">Load</ion-button>
+  <ion-button (click)="onClear()">Clear</ion-button>
+  <div>The value is : {{ saving }} </div>   -->
+</ion-header>
+
+<ion-content>
+
+  <div *ngIf="loginOn else signup_form">
+    Login<br>
+    <div *ngIf="user$ | async as user; else logins">
+      <!-- {{ user | json }} -->
+      <hr>
+      <ion-button class="button" (click)="signOut()">Sign Out</ion-button>        
+    </div>
+      
+    <ng-template #logins>
+      <ion-button (click)="onMode()">LOGIN</ion-button>
+      <ion-button (click)="onMode()">SIGN UP</ion-button>
+      <br>
+      <input type="email" [(ngModel)]="email" placeholder="Email" />
+      <br>
+      <input type="password" [(ngModel)]="password" placeholder="Password" />
+
+      <ion-button (click)="myLogin()">Login</ion-button>
+      <span>{{ errorMessage }}</span>
+      <!-- <button (click)="onForgot()">Forgot my PW</button> -->
+    </ng-template>  
+  </div>
+
+
+  <ng-template #signup_form>
+    <ion-button (click)="onMode()">LOGIN</ion-button>
+    <ion-button (click)="onMode()">SIGN UP</ion-button>
+    <br>    
+    <input type="email" [(ngModel)]="email2" placeholder="Email" />
+    <input type="text" [(ngModel)]="displayName2" placeholder="User Name" />
+    <br>
+    <input type="password" [(ngModel)]="password2" placeholder="Password" />
+    <span>{{ errorMessage2 }}</span>
+    <ion-button (click)="onCreate()">Create User</ion-button>
+  </ng-template>
+
+
+
+
+</ion-content>

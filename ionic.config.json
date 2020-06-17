@@ -1,0 +1,7 @@
+{
+  "name": "sonmoa3",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
